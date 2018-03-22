@@ -1,9 +1,13 @@
 import React, { Component } from 'react';
 
-import HomePage from './page/home'
-
 import logo from './logo.svg';
 import './App.css';
+
+// You can choose your kind of history here (e.g. browserHistory)
+import { BrowserRouter, Route } from 'react-router-dom';
+
+import HomePage from "./page/home";
+import AddPage from "./page/add";
 
 function Clock(props) {
     return (
@@ -23,7 +27,12 @@ class App extends Component {
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
         </header>
-          <HomePage />
+          <BrowserRouter>
+              <div>
+                  <Route exact path="/" component={HomePage} />
+                  <Route path="/add" component={AddPage} />
+              </div>
+          </BrowserRouter>
           <Clock date={new Date()} />
       </div>
     );

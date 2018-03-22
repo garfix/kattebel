@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const name = {
     firstName: 'Patrick',
@@ -17,6 +18,7 @@ function HomePage() {
             <p className="App-intro">
                 To get started, edit <code>src/App.js</code> and save to reload.
             </p>
+            <Link to="/add">Click me</Link>
         </div>
     );
 }
