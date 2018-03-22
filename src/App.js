@@ -22,15 +22,22 @@ function Clock(props) {
 class App extends Component {
   render() {
 
+      // When the site-root is a path
+      // https://github.com/facebook/create-react-app/issues/2959
+
+      let homeUrl = process.env.PUBLIC_URL + '/';
+      let addUrl = process.env.PUBLIC_URL + '/add';
+
       return (
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
         </header>
+          {homeUrl}
           <BrowserRouter>
               <div>
-                  <Route exact path="/" component={HomePage} />
-                  <Route path="/add" component={AddPage} />
+                  <Route exact path={homeUrl} component={HomePage} />
+                  <Route path={addUrl} component={AddPage} />
               </div>
           </BrowserRouter>
           <Clock date={new Date()} />
