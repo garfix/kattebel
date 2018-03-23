@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { getRoute } from "./page/routes";
 
 import logo from './logo.svg';
 import './App.css';
@@ -6,8 +7,8 @@ import './App.css';
 // You can choose your kind of history here (e.g. browserHistory)
 import { BrowserRouter, Route } from 'react-router-dom';
 
-import HomePage from "./page/home";
-import AddPage from "./page/add";
+import HomePage from "./page/HomePage";
+import AddPage from "./page/AddPage";
 
 function Clock(props) {
     return (
@@ -25,19 +26,15 @@ class App extends Component {
       // When the site-root is a path
       // https://github.com/facebook/create-react-app/issues/2959
 
-      let homeUrl = process.env.PUBLIC_URL + '/';
-      let addUrl = process.env.PUBLIC_URL + '/add';
-
       return (
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
         </header>
-          {homeUrl}
           <BrowserRouter>
               <div>
-                  <Route exact path={homeUrl} component={HomePage} />
-                  <Route path={addUrl} component={AddPage} />
+                  <Route exact path={getRoute('/')} component={HomePage} />
+                  <Route path={getRoute('/add')} component={AddPage} />
               </div>
           </BrowserRouter>
           <Clock date={new Date()} />
