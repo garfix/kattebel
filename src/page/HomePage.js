@@ -14,11 +14,11 @@ function formatName(user) {
 function HomePage() {
 
     return (
-        <div>
-            <h1>Homepage</h1>
+        <div className="page">
+            <h1>Kattebel</h1>
             <h1>Hello, {formatName(name)}!</h1>
             <p className="App-intro">
-                To get started, edit <code>src/App.js</code> and save to reload.
+                Allow me to remind you of something.
             </p>
             <Link to={getRoute('/Add')}>Add</Link>
         </div>

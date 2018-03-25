@@ -1,5 +1,4 @@
 .App {
-  text-align: center;
 }
 
 .App-logo {
@@ -25,4 +24,27 @@
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
+}
+
+.page {
+    background-color: aliceblue;
+    max-width: 1000px;
+    width: 50%;
+    margin: 0 auto;
+    padding: 1em;
+}
+
+form {}
+
+label {
+    display: block;
+    margin-bottom: 0.5em;
+}
+
+input, textarea{
+    display: block;
+}
+
+textarea {
+    width: 100%;
 }
