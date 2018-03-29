@@ -1,6 +1,6 @@
-const memoryReducer = (state = [], action) => {
+const reminderReducer = (state = [], action) => {
     switch (action.type) {
-        case 'ADD_MEMORY':
+        case 'ADD_REMINDER':
             return [
                 ...state,
                 {
@@ -15,4 +15,4 @@ const memoryReducer = (state = [], action) => {
     }
 };
 
-export default memoryReducer
+export default reminderReducer

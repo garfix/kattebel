@@ -7,7 +7,7 @@ import './index.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 
-import memoryReducer from './memory/reducer'
+import memoryReducer from './reminder/reducer'
 
 const store = createStore(combineReducers({
     memoryReducer

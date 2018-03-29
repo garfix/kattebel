@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { getRoute } from "./routes";
 import { v4 } from "uuid"
-import * as memoryActions from "../memory/action";
+import * as reminderActions from "../reminder/action";
 
 class AddPage extends React.Component {
 
@@ -33,7 +33,7 @@ class AddPage extends React.Component {
     handleSubmit(event) {
         console.log(this.state);
 
-        this.props.addMemory(this.state.id, this.state.date, this.state.time, this.state, this.state.description);
+        this.props.addReminder(this.state.id, this.state.date, this.state.time, this.state, this.state.description);
 
         event.preventDefault();
     }
@@ -64,8 +64,8 @@ class AddPage extends React.Component {
 }
 
 // function mapStateToProps(state, ownProps) {
-//     // map state.memoryReducer.??? naar een props object, die aan de constructor gevoerd wordt
+//     // map state.reminderReducer.??? naar een props object, die aan de constructor gevoerd wordt
 //     return {}
 // }
 
-export default connect(null, memoryActions)(AddPage)
+export default connect(null, reminderActions)(AddPage)
