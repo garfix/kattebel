@@ -15,9 +15,25 @@ class AddPage extends React.Component {
     }
 
     componentWillMount() {
+
+        function pad2(number) {
+
+            let str = '' + number;
+            while (str.length < 2) {
+                str = '0' + str;
+            }
+
+            return str;
+        }
+
+        let now = new Date();
+        let date = now.getFullYear() + '-' + pad2(now.getMonth() + 1) + '-' + pad2(now.getDate());
+
+        console.log(now);
+
         this.setState({
             id: v4(),
-            date: new Date(),
+            date: date,
             time: "07:00",
             description: ""
         });
@@ -35,16 +51,24 @@ class AddPage extends React.Component {
 
     handleSubmit(event) {
 
+        event.preventDefault();
+
+        if (this.state.description === "") {
+            return;
+        }
+
+        // store the reminder
         this.props.addReminder(this.state.id, this.state.date, this.state.time, this.state, this.state.description);
 
-        event.preventDefault();
+        // navigate to overview
+        this.props.history.push(getRoute('/'));
     }
 
     render() {
         return (
             <div className="page">
                 <Link to={getRoute('/')}>To home page</Link>
-                <h1>Add</h1>
+                <h1>Add Reminder</h1>
                 <form onSubmit={this.handleSubmit}>
                     <label>
                         Description:
@@ -64,10 +88,5 @@ class AddPage extends React.Component {
         );
     }
 }
-
-// function mapStateToProps(state, ownProps) {
-//     // map state.reminderReducer.??? naar een props object, die aan de constructor gevoerd wordt
-//     return {}
-// }
 
 export default connect(null, { addReminder })(AddPage)
