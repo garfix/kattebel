@@ -3,21 +3,24 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { getRoute } from "./routes";
 import { v4 } from "uuid"
-import * as reminderActions from "../reminder/action";
+import { addReminder } from "../reminder/action";
 
 class AddPage extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = {
-            id: v4(),
-            date: new Date(),
-            time: "09:00",
-            description: ""
-        };
 
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+    }
+
+    componentWillMount() {
+        this.setState({
+            id: v4(),
+            date: new Date(),
+            time: "07:00",
+            description: ""
+        });
     }
 
     handleInputChange(event) {
@@ -31,7 +34,6 @@ class AddPage extends React.Component {
     }
 
     handleSubmit(event) {
-        console.log(this.state);
 
         this.props.addReminder(this.state.id, this.state.date, this.state.time, this.state, this.state.description);
 
@@ -68,4 +70,4 @@ class AddPage extends React.Component {
 //     return {}
 // }
 
-export default connect(null, reminderActions)(AddPage)
+export default connect(null, { addReminder })(AddPage)

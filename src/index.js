@@ -7,10 +7,12 @@ import './index.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 
-import memoryReducer from './reminder/reducer'
+import reminderReducer from './reminder/reducer'
+import userReducer from "./user/reducer";
 
 const store = createStore(combineReducers({
-    memoryReducer
+    userReducer: userReducer,
+    reminderReducer: reminderReducer
 }));
 
 store.subscribe(() => {
