@@ -28,8 +28,8 @@
 
 .page {
     background-color: aliceblue;
-    max-width: 1000px;
-    width: 50%;
+    min-width: 50%;
+    max-width: 750px;
     margin: 0 auto;
     padding: 1em;
 }

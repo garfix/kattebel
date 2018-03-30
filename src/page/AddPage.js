@@ -1,13 +1,13 @@
 import React from 'react';
 import Form from 'react-validation/build/form';
 import Input from 'react-validation/build/input';
-import Textarea from 'react-validation/build/input';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { getRoute } from "./routes";
 import { v4 } from "uuid"
 import { addReminder } from "../reminder/action";
 import { getCurrentDate } from "../model/date";
+import "./add.css"
 
 class AddPage extends React.Component {
 
@@ -64,7 +64,7 @@ class AddPage extends React.Component {
         const required = (value) => {
             if (!value.toString().trim().length) {
                 // We can return string or jsx as the 'error' prop for the validated Component
-                return <span class="error">Required</span>;
+                return <span className="error">Please fill this field</span>;
             }
         };
 
@@ -76,7 +76,7 @@ class AddPage extends React.Component {
                     <div>
                         <label>
                             Description*
-                            <Textarea name="description" value={this.state.description} onChange={this.handleInputChange} validations={[required]} />
+                            <Input name="description" value={this.state.description} onChange={this.handleInputChange} validations={[required]} />
                         </label>
                     </div>
                     <div>
