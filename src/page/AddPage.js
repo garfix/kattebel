@@ -7,6 +7,8 @@ import { getRoute } from "./routes";
 import { v4 } from "uuid"
 import { addReminder } from "../reminder/action";
 import { getCurrentDate } from "../model/date";
+import { FormattedMessage } from 'react-intl';
+import { formatMessage } from 'react-intl';
 import "./add.css"
 
 class AddPage extends React.Component {
@@ -42,8 +44,6 @@ class AddPage extends React.Component {
 
         event.preventDefault();
 
-        console.log(this.form.getChildContext());
-
         this.form.validateAll();
 
         // check if form is valid
@@ -71,23 +71,23 @@ class AddPage extends React.Component {
         return (
             <div className="page">
                 <Link to={getRoute('/')}>To home page</Link>
-                <h1>Add Reminder</h1>
+                <h1><FormattedMessage id={"Add Reminder"} /></h1>
                 <Form ref={c => { this.form = c }} onSubmit={this.handleSubmit}>
                     <div>
                         <label>
-                            Description*
+                            <FormattedMessage id="Description"/>*
                             <Input name="description" value={this.state.description} onChange={this.handleInputChange} validations={[required]} />
                         </label>
                     </div>
                     <div>
                         <label>
-                            Date*
+                            <FormattedMessage id="Date"/>*
                             <Input type="date" name="date" value={this.state.date} onChange={this.handleInputChange}/>
                         </label>
                     </div>
                     <div>
                         <label>
-                            Time*
+                            <FormattedMessage id="Time"/>*
                             <Input type="time" name="time" value={this.state.time} onChange={this.handleInputChange}/>
                         </label>
                     </div>
