@@ -5,7 +5,8 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { getRoute } from "./routes";
 import { v4 } from "uuid"
-import { addReminder } from "../reminder/action";
+//import { addReminder } from "../reminder/action";
+import { storeReminder } from "../reminder/db";
 import { getCurrentDate } from "../model/date";
 import { FormattedMessage } from 'react-intl';
 import { formatMessage } from 'react-intl';
@@ -53,7 +54,9 @@ class AddPage extends React.Component {
         }
 
         // store the reminder
-        this.props.addReminder(this.state.id, this.state.date, this.state.time, this.state, this.state.description);
+//        this.props.addReminder(this.state.id, this.state.date, this.state.time, this.state.description);
+
+        storeReminder(this.state.id, this.state.date, this.state.time, this.state.description);
 
         // navigate to overview
         this.props.history.push(getRoute('/'));
@@ -98,4 +101,4 @@ class AddPage extends React.Component {
     }
 }
 
-export default connect(null, { addReminder })(AddPage)
+export default connect(null, { /*addReminder*/ })(AddPage)
