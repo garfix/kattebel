@@ -20,7 +20,8 @@ function HomePage() {
             <p className="App-intro">
                 Allow me to remind you of something.
             </p>
-            <Link to={getRoute('/Add')}>Add</Link>
+            <Link to={getRoute('/add')}>Add Reminder</Link><br />
+            <Link to={getRoute('/reminder')}>Reminders</Link>
         </div>
     );
 }

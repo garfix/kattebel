@@ -5,11 +5,9 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { getRoute } from "./routes";
 import { v4 } from "uuid"
-//import { addReminder } from "../reminder/action";
 import { storeReminder } from "../reminder/db";
 import { getCurrentDate } from "../model/date";
 import { FormattedMessage } from 'react-intl';
-import { formatMessage } from 'react-intl';
 import "./add.css"
 
 class AddPage extends React.Component {

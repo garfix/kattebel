@@ -6,7 +6,6 @@ import { addLocaleData, IntlProvider } from 'react-intl';
 import registerServiceWorker from './registerServiceWorker';
 import App from './App';
 import './index.css';
-//import nl_NL from "./lang/nl_NL"
 
 import reminderReducer from './reminder/reducer'
 import userReducer from "./user/reducer";
@@ -30,6 +29,11 @@ let messages = {};
 switch (locale) {
     case 'nl':
         messages = require("./lang/nl_NL");
+        break;
+    default:
+        messages = [];
+        break;
+
 }
 
 ReactDOM.render(
