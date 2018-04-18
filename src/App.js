@@ -10,6 +10,7 @@ import { BrowserRouter, Route } from 'react-router-dom';
 import HomePage from "./page/HomePage";
 import AddPage from "./page/AddPage";
 import ReminderOverviewPage from "./page/ReminderOverviewPage"
+import EditPage from "./page/EditPage";
 
 class App extends Component {
   render() {
@@ -22,8 +23,9 @@ class App extends Component {
           <BrowserRouter>
               <div>
                   <Route exact path={getRoute('/')} component={HomePage} />
-                  <Route path={getRoute('/add')} component={AddPage} />
-                  <Route path={getRoute('/reminder')} component={ReminderOverviewPage} />
+                  <Route exact path={getRoute('/add')} component={AddPage} />
+                  <Route exact path={getRoute('/reminder')} component={ReminderOverviewPage} />
+                  <Route path={getRoute('/reminder/edit/:id')} component={EditPage} />
               </div>
           </BrowserRouter>
       </div>

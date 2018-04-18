@@ -7,20 +7,32 @@ export function storeReminder(id, date, time, description)
         let db = event.target.result;
         let transaction = db.transaction("reminders", "readwrite");
 
-        transaction.onerror = () => {
-            console.log("Error: ", event.target.error);
-        };
+        // transaction.onerror = () => {
+        //     console.log("Error: ", event.target.error);
+        // };
 
         let store = transaction.objectStore("reminders");
-        store.add({ id, date, time, description })
+        let index = store.index("id_index");
+        let cursor = index.openCursor(id);
+
+        cursor.onsuccess = event => {
+
+            let cursor = event.target.result;
+
+            if (cursor) {
+                cursor.update({ id, date, time, description })
+            } else {
+                store.add({ id, date, time, description })
+            }
+        };
     }
 }
 
-export function getReminders()
+export function getReminder(id)
 {
-    return new Promise((resolve) => {
+    return new Promise((resolve, reject) => {
 
-        connectToDb().onsuccess = (event) => {
+        connectToDb().onsuccess = event => {
 
             let db = event.target.result;
             let transaction = db.transaction("reminders");
@@ -30,21 +42,52 @@ export function getReminders()
             };
 
             let store = transaction.objectStore("reminders");
-            let cursor = store.openCursor();
-            let reminders = [];
+            let index = store.index("id_index");
+            let cursor = index.openCursor(id);
 
-            cursor.onsuccess = (event) => {
+            cursor.onsuccess = event => {
+
                 let cursor = event.target.result;
 
-                if (!cursor) {
+                if (cursor) {
+                    let reminder = cursor.value;
+                    resolve(reminder);
+                } else {
+                    reject();
+                }
+            };
+        };
+    });
+}
+
+export function getReminders()
+{
+    return new Promise(resolve => {
+
+        connectToDb().onsuccess = event => {
+
+            let db = event.target.result;
+            let transaction = db.transaction("reminders");
+
+            transaction.onerror = () => {
+                console.log("Error: ", event.target.error);
+            };
+
+            let store = transaction.objectStore("reminders");
+            let index = store.index("date_index");
+            let cursor = index.openCursor(null, "prev");
+            let reminders = [];
+
+            cursor.onsuccess = event => {
+
+                let cursor = event.target.result;
+
+                if (!cursor || reminders.length === 10) {
                     resolve(reminders);
                     return
                 }
 
-                let reminder = cursor.value;
-
-                reminders.push(reminder);
-
+                reminders.push(cursor.value);
                 cursor.continue();
             };
         };
