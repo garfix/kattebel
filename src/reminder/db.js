@@ -1,17 +1,10 @@
-import { connectToDb } from "../model/db"
+import {connectToDb, connectToObjectStore, REMINDERS} from "../model/db"
 
 export function storeReminder(id, date, time, description)
 {
-    connectToDb().onsuccess = (event) => {
+    connectToDb().then(db => {
 
-        let db = event.target.result;
-        let transaction = db.transaction("reminders", "readwrite");
-
-        // transaction.onerror = () => {
-        //     console.log("Error: ", event.target.error);
-        // };
-
-        let store = transaction.objectStore("reminders");
+        let store = connectToObjectStore(db, REMINDERS, "readwrite");
         let index = store.index("id_index");
         let cursor = index.openCursor(id);
 
@@ -25,23 +18,16 @@ export function storeReminder(id, date, time, description)
                 store.add({ id, date, time, description })
             }
         };
-    }
+    })
 }
 
 export function getReminder(id)
 {
     return new Promise((resolve, reject) => {
 
-        connectToDb().onsuccess = event => {
+        connectToDb().then(db => {
 
-            let db = event.target.result;
-            let transaction = db.transaction("reminders");
-
-            transaction.onerror = () => {
-                console.log("Error: ", event.target.error);
-            };
-
-            let store = transaction.objectStore("reminders");
+            let store = connectToObjectStore(db, REMINDERS, "readonly");
             let index = store.index("id_index");
             let cursor = index.openCursor(id);
 
@@ -53,27 +39,20 @@ export function getReminder(id)
                     let reminder = cursor.value;
                     resolve(reminder);
                 } else {
-                    reject();
+                    resolve(null);
                 }
             };
-        };
+        })
     });
 }
 
-export function getReminders()
+export function getReminders(max = 10)
 {
     return new Promise(resolve => {
 
-        connectToDb().onsuccess = event => {
+        connectToDb().then(db => {
 
-            let db = event.target.result;
-            let transaction = db.transaction("reminders");
-
-            transaction.onerror = () => {
-                console.log("Error: ", event.target.error);
-            };
-
-            let store = transaction.objectStore("reminders");
+            let store = connectToObjectStore(db, REMINDERS, "readonly");
             let index = store.index("date_index");
             let cursor = index.openCursor(null, "prev");
             let reminders = [];
@@ -82,7 +61,7 @@ export function getReminders()
 
                 let cursor = event.target.result;
 
-                if (!cursor || reminders.length === 10) {
+                if (!cursor || reminders.length === max) {
                     resolve(reminders);
                     return
                 }
@@ -90,6 +69,6 @@ export function getReminders()
                 reminders.push(cursor.value);
                 cursor.continue();
             };
-        };
+        });
     });
 }

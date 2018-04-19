@@ -1,30 +1,43 @@
+export const REMINDERS = "reminders";
+
 export function connectToDb()
 {
     const REMINDERS = "reminders";
 
-    let request = window.indexedDB.open("kattebel", 2);
+    return new Promise((resolve, reject) => {
 
-    request.onerror = event => {
-        console.log("Database error: ", event.target.error)
-    };
+        let request = window.indexedDB.open("kattebel", 2);
 
-    request.onupgradeneeded = event => {
+        request.onerror = event => {
+            reject("Database error: " + event.target.error)
+        };
 
-        let db = event.target.result;
-        let transaction = event.target.transaction;
+        request.onupgradeneeded = event => {
 
-        if (event.oldVersion < 1) {
-            db.createObjectStore(REMINDERS, {
-                keyPath: "id"
-            }).createIndex("date_index", "date", { unique: false })
+            let db = event.target.result;
+            let transaction = event.target.transaction;
+
+            if (event.oldVersion < 1) {
+                db.createObjectStore(REMINDERS, {
+                    keyPath: "id"
+                }).createIndex("date_index", "date", { unique: false })
+            }
+
+            if (event.oldVersion < 2) {
+                transaction.objectStore(REMINDERS)
+                    .createIndex("id_index", "id", { unique: true })
+            }
+        };
+
+        request.onsuccess = event => {
+            resolve(event.target.result)
         }
+    });
+}
 
-
-        if (event.oldVersion < 2) {
-            transaction.objectStore(REMINDERS)
-                .createIndex("id_index", "id", { unique: true })
-        }
-    };
-
-    return request
+export function connectToObjectStore(db, storeName, transactionMode)
+{
+    return db
+        .transaction(storeName, transactionMode)
+        .objectStore(storeName)
 }
