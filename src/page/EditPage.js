@@ -7,6 +7,7 @@ import { storeReminder } from "../reminder/db";
 import { getReminder } from "../reminder/db";
 import { FormattedMessage } from 'react-intl';
 import "./add.css"
+import ErrorMessage from "./ErrorMessage";
 
 class EditPage extends React.Component {
 
@@ -20,7 +21,8 @@ class EditPage extends React.Component {
             id: this.props.match.params.id,
             date: null,
             time: null,
-            description: null
+            description: "",
+            error: null
         };
     }
 
@@ -33,7 +35,7 @@ class EditPage extends React.Component {
                 time: reminder.time,
                 description: reminder.description
             });
-        })
+        }).catch(error => { this.setState({ error }) })
     }
 
     handleInputChange(event) {
@@ -98,6 +100,7 @@ class EditPage extends React.Component {
                     </div>
                     <Input type="submit" value="Submit" />
                 </Form>
+                <ErrorMessage error={this.state.error} />
             </div>
         );
     }

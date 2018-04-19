@@ -6,7 +6,7 @@ export function storeReminder(id, date, time, description)
 
         connectToDb().then(db => {
 
-            let store = connectToObjectStore(db, REMINDERS, "readonly");
+            let store = connectToObjectStore(db, REMINDERS, "readwrite");
             let index = store.index("id_index");
             let cursor = index.openCursor(id);
 
@@ -33,6 +33,8 @@ export function getReminder(id)
     return new Promise((resolve, reject) => {
 
         connectToDb().then(db => {
+
+//            throw new DOMException("dom2!")
 
             let store = connectToObjectStore(db, REMINDERS, "readonly");
             let index = store.index("id_index");

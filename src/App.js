@@ -13,24 +13,25 @@ import ReminderOverviewPage from "./page/ReminderOverviewPage"
 import EditPage from "./page/EditPage";
 
 class App extends Component {
-  render() {
 
-      return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-        </header>
-          <BrowserRouter>
-              <div>
-                  <Route exact path={getRoute('/')} component={HomePage} />
-                  <Route exact path={getRoute('/add')} component={AddPage} />
-                  <Route exact path={getRoute('/reminder')} component={ReminderOverviewPage} />
-                  <Route path={getRoute('/reminder/edit/:id')} component={EditPage} />
-              </div>
-          </BrowserRouter>
-      </div>
-    );
-  }
+    render() {
+
+        return (
+            <div className="App">
+                <header className="App-header">
+                    <img src={logo} className="App-logo" alt="logo" />
+                </header>
+                <BrowserRouter>
+                    <div>
+                        <Route exact path={getRoute('/')} component={HomePage} />
+                        <Route exact path={getRoute('/add')} component={AddPage} />
+                        <Route exact path={getRoute('/reminder')} component={ReminderOverviewPage} />
+                        <Route path={getRoute('/reminder/edit/:id')} component={EditPage} />
+                    </div>
+                </BrowserRouter>
+            </div>
+        );
+    }
 }
 
 export default App;
