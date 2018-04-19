@@ -61,7 +61,7 @@ class EditPage extends React.Component {
         storeReminder(this.state.id, this.state.date, this.state.time, this.state.description);
 
         // navigate to overview
-        this.props.history.push(getRoute('/'));
+        this.props.history.push(getRoute('/reminder'));
     }
 
     render() {

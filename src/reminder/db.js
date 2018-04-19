@@ -2,23 +2,30 @@ import {connectToDb, connectToObjectStore, REMINDERS} from "../model/db"
 
 export function storeReminder(id, date, time, description)
 {
-    connectToDb().then(db => {
+    return new Promise((resolve, reject) => {
 
-        let store = connectToObjectStore(db, REMINDERS, "readwrite");
-        let index = store.index("id_index");
-        let cursor = index.openCursor(id);
+        connectToDb().then(db => {
 
-        cursor.onsuccess = event => {
+            let store = connectToObjectStore(db, REMINDERS, "readonly");
+            let index = store.index("id_index");
+            let cursor = index.openCursor(id);
 
-            let cursor = event.target.result;
+            cursor.onsuccess = event => {
 
-            if (cursor) {
-                cursor.update({ id, date, time, description })
-            } else {
-                store.add({ id, date, time, description })
-            }
-        };
-    })
+                let cursor = event.target.result;
+                let object = {id, date, time, description};
+
+                if (cursor) {
+                    cursor.update(object)
+                } else {
+                    store.add(object)
+                }
+
+                resolve(object)
+            };
+
+        }).catch(error => reject(error));
+    });
 }
 
 export function getReminder(id)
@@ -39,16 +46,17 @@ export function getReminder(id)
                     let reminder = cursor.value;
                     resolve(reminder);
                 } else {
-                    resolve(null);
+                    reject();
                 }
             };
-        })
+
+        }).catch(error => reject(error));
     });
 }
 
 export function getReminders(max = 10)
 {
-    return new Promise(resolve => {
+    return new Promise((resolve, reject) => {
 
         connectToDb().then(db => {
 
@@ -69,6 +77,7 @@ export function getReminders(max = 10)
                 reminders.push(cursor.value);
                 cursor.continue();
             };
-        });
+
+        }).catch(error => reject(error));
     });
 }
