@@ -3,7 +3,8 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux'
 import { createStore, combineReducers } from 'redux'
 import { addLocaleData, IntlProvider } from 'react-intl';
-import registerServiceWorker from './registerServiceWorker';
+//import registerServiceWorker from './registerServiceWorker';
+
 import App from './App';
 import './index.css';
 
@@ -21,8 +22,8 @@ store.subscribe(() => {
 
 let locale = "nl";
 
-let frLocaleData = require('react-intl/locale-data/' + locale);
-addLocaleData(frLocaleData);
+let localeData = require('react-intl/locale-data/' + locale);
+addLocaleData(localeData);
 
 let messages = {};
 
@@ -45,4 +46,13 @@ ReactDOM.render(
     document.getElementById('root')
 );
 
-registerServiceWorker();
+// https://github.com/facebook/create-react-app/issues/2396
+// registerServiceWorker();
+
+if ("serviceWorker" in navigator) {
+    navigator.serviceWorker.register(process.env.PUBLIC_URL + "/custom-sw.js")
+        .catch(err => {
+            console.log("Service worker could not be registered");
+            console.log(err);
+        })
+}

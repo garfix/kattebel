@@ -4,6 +4,7 @@
   "private": false,
   "homepage": "http://patrickvanbergen.com/kattebel",
   "dependencies": {
+    "cra-append-sw": "^2.3.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-intl": "^2.4.0",
@@ -15,8 +16,9 @@
     "uuid": "^3.2.1"
   },
   "scripts": {
+    "sw": "cra-append-sw --mode dev ./src/custom-sw.js",
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "react-scripts build && cra-append-sw ./src/custom-sw.js",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   }

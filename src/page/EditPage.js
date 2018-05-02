@@ -83,7 +83,8 @@ class EditPage extends React.Component {
                     <div>
                         <label>
                             <FormattedMessage id="Description"/>*
-                            <Input name="description" value={this.state.description} onChange={this.handleInputChange} validations={[required]} />
+                            <Input name="description" value={this.state.description} onChange={this.handleInputChange}
+                                validations={[required]} />
                         </label>
                     </div>
                     <div>

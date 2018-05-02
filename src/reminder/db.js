@@ -34,8 +34,6 @@ export function getReminder(id)
 
         connectToDb().then(db => {
 
-//            throw new DOMException("dom2!")
-
             let store = connectToObjectStore(db, REMINDERS, "readonly");
             let index = store.index("id_index");
             let cursor = index.openCursor(id);
