@@ -21,6 +21,10 @@ export function storeReminder(id, date, time, description)
                     store.add(object)
                 }
 
+                // navigator.serviceWorker.ready.then(registration => {
+                //     registration.sync.register("sync-reminders");
+                // });
+
                 resolve(object)
             };
 

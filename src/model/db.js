@@ -6,7 +6,7 @@ export function connectToDb()
 
     return new Promise((resolve, reject) => {
 
-        let request = window.indexedDB.open("kattebel", 2);
+        let request = indexedDB.open("kattebel", 2);
 
         request.onerror = event => {
             reject("Database error: " + event.target.error)

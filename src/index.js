@@ -54,9 +54,5 @@ if ("serviceWorker" in navigator) {
         .catch(err => {
             console.log("Service worker could not be registered");
             console.log(err);
-        })
-
-    navigator.serviceWorker.ready.then(registration => {
-        registration.sync.register("sync-reminders");
-    })
+        });
 }
