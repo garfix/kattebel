@@ -8,16 +8,14 @@ self.addEventListener('install', event => {
 
     const publicUrl = new URL(location).searchParams.get('path');
 
-    console.log(publicUrl + '!');
-
     // these files must be precached, because they are loaded before the service worker is activated
     let essentialFiles = [
-        publicUrl + '/index.html',
+        publicUrl + '/',
         publicUrl + '/catbell.png',
-        publicUrl + '/custom-sw.js?path=' + publicUrl,
         publicUrl + '/static/media/logo.5d5d9eef.svg',
-        publicUrl + '/static/js/main.d877cfb9.js',
-        publicUrl + '/static/js/bundle.js',
+        publicUrl + '/static/css/main.91b8247b.css',
+        publicUrl + '/static/js/main.d877cfb9.js', // production
+        publicUrl + '/static/js/bundle.js', // development
         publicUrl + '/manifest.json'
     ];
 
