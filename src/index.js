@@ -50,7 +50,7 @@ ReactDOM.render(
 // registerServiceWorker();
 
 if ("serviceWorker" in navigator) {
-    navigator.serviceWorker.register(process.env.PUBLIC_URL + "/custom-sw.js")
+    navigator.serviceWorker.register(process.env.PUBLIC_URL + "/custom-sw.js?path=" + encodeURI(process.env.PUBLIC_URL))
         .catch(err => {
             console.log("Service worker could not be registered");
             console.log(err);

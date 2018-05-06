@@ -2,7 +2,7 @@
   "name": "kattebel",
   "version": "0.1.0",
   "private": false,
-  "homepage": "http://patrickvanbergen.com/kattebel",
+  "homepage": "https://patrickvanbergen.com/kattebel",
   "dependencies": {
     "cra-append-sw": "^2.3.0",
     "react": "^16.2.0",
@@ -18,7 +18,7 @@
   "scripts": {
     "sw": "cra-append-sw --mode dev ./src/custom-sw.js",
     "start": "react-scripts start",
-    "build": "react-scripts build && cra-append-sw ./src/custom-sw.js",
+    "build": "cra-append-sw ./src/custom-sw.js && react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   }
