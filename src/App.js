@@ -11,6 +11,7 @@ import HomePage from "./page/HomePage";
 import AddPage from "./page/AddPage";
 import ReminderOverviewPage from "./page/ReminderOverviewPage"
 import EditPage from "./page/EditPage";
+import NotificationPage from "./page/NotificationPage"
 
 class App extends Component {
 
@@ -26,6 +27,7 @@ class App extends Component {
                         <Route exact path={getRoute('/')} component={HomePage} />
                         <Route exact path={getRoute('/add')} component={AddPage} />
                         <Route exact path={getRoute('/reminder')} component={ReminderOverviewPage} />
+                        <Route exact path={getRoute('/notification')} component={NotificationPage} />
                         <Route path={getRoute('/reminder/edit/:id')} component={EditPage} />
                     </div>
                 </BrowserRouter>

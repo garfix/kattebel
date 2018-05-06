@@ -35,7 +35,7 @@ self.addEventListener('sync', (event) => {
 
 self.addEventListener('fetch', event => {
 
-    console.log(event.request.url);
+//    console.log(event.request.url);
 
     if (event.request.url.includes('sockjs-node')) {
         return fetch(event.request);
@@ -44,21 +44,15 @@ self.addEventListener('fetch', event => {
     event.respondWith(
         caches.open('kattebel').then(cache => {
 
-            console.log('1')
-
             return cache.match(event.request).then(cachedResponse => {
-
-                console.log('2', cachedResponse)
 
                 if (cachedResponse) {
                     return cachedResponse;
                 } else {
 
-                    console.log('3', event.request)
-
                     return fetch(event.request).then(networkResponse => {
 
-                        console.log('4', networkResponse)
+//                        console.log('From network: ', networkResponse)
 
                         cache.put(event.request, networkResponse.clone());
                         return networkResponse;

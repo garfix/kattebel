@@ -21,7 +21,8 @@ function HomePage() {
                 Allow me to remind you of something.
             </p>
             <Link to={getRoute('/add')}>Add Reminder</Link><br />
-            <Link to={getRoute('/reminder')}>Reminders</Link>
+            <Link to={getRoute('/reminder')}>Reminders</Link><br />
+            <Link to={getRoute('/notification')}>Notifications</Link>
         </div>
     );
 }

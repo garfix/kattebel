@@ -5,5 +5,7 @@
   "Description": "Beschrijving",
   "Date": "Datum",
   "Time": "Tijd",
-  "Submit": "Opslaan"
+  "Submit": "Opslaan",
+  "Notifications": "Notificaties",
+  "Allow notifications": "Notificaties toestaan"
 }
