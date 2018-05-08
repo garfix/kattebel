@@ -1,4 +1,15 @@
 Options -MultiViews
 RewriteEngine On
+
+############################################
+## HTTPS rewrite
+
+    RewriteCond %{HTTP_HOST} patrickvanbergen\.com$
+    RewriteCond %{HTTPS} off
+    RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+############################################
+## Route all react app paths to index.html
+
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^ index.html [QSA,L]
